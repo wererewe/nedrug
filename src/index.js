@@ -1,14 +1,17 @@
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
+import './index.css';
 import reportWebVitals from './reportWebVitals';
 
+const theme = createTheme({});
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <ThemeProvider theme={theme}>
+        <App/>
+    </ThemeProvider>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
