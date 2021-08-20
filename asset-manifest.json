@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/nedrug/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/nedrug/static/js/main.b33e7c2d.chunk.js",
+    "main.js.map": "/nedrug/static/js/main.b33e7c2d.chunk.js.map",
+    "runtime-main.js": "/nedrug/static/js/runtime-main.aac7fdb3.js",
+    "runtime-main.js.map": "/nedrug/static/js/runtime-main.aac7fdb3.js.map",
+    "static/js/2.80a939fa.chunk.js": "/nedrug/static/js/2.80a939fa.chunk.js",
+    "static/js/2.80a939fa.chunk.js.map": "/nedrug/static/js/2.80a939fa.chunk.js.map",
+    "static/js/3.ea8287b8.chunk.js": "/nedrug/static/js/3.ea8287b8.chunk.js",
+    "static/js/3.ea8287b8.chunk.js.map": "/nedrug/static/js/3.ea8287b8.chunk.js.map",
+    "index.html": "/nedrug/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/nedrug/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.80a939fa.chunk.js.LICENSE.txt": "/nedrug/static/js/2.80a939fa.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.aac7fdb3.js",
+    "static/js/2.80a939fa.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.b33e7c2d.chunk.js"
+  ]
+}
