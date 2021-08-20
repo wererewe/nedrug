@@ -1,4 +1,4 @@
-import { Box, InputLabel,  makeStyles } from "@material-ui/core";
+import { Box, InputLabel,  LinearProgress,  makeStyles } from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import pickBy from "lodash/pickBy";
@@ -36,8 +36,11 @@ function App() {
 
   
   const fetchData = (async (item_name: string) => {
-    const baseUrl = '/1471057/MdcinPrductPrmisnInfoService1/getMdcinPrductItem'; /*URL*/
+    const headers = {'Access-Control-Allow-Origin': '*'}
+  
+    const baseUrl = 'https://cors-anywhere.herokuapp.com/http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService1/getMdcinPrductItem'; /*URL*/
     const response = await axios.get(baseUrl, {
+      headers,
       params: {
         ServiceKey,
         item_name: encodeURI(item_name)
@@ -55,10 +58,11 @@ function App() {
   useEffect(() => {
     if (!itemNames || !itemNames.length) { return }
     if (isLoading) return
-    setIsLoading(true)
+    
     
     try {
-    const fetch = async () => {
+      const fetch = async () => {
+      setIsLoading(true)
       await Promise.all(itemNames.map(fetchData));
       setIsSuccess(true)
     }
@@ -67,9 +71,10 @@ function App() {
       
     } catch (e) {
       console.log('error=', e)
+      setIsLoading(false)
     } 
 
-  }, [itemNames, result, isLoading, isSuccess])
+  }, [itemNames])
 
   const autofitColumns = (json: any[]) => {
 
@@ -89,6 +94,8 @@ function App() {
   useEffect(() => {
     if (!isSuccess || !result?.length) return
     
+    setIsLoading(false)
+    
     const wb = XLSX.utils.book_new();
     const worksheet = XLSX.utils.json_to_sheet(result);
     const wscols = autofitColumns(result)
@@ -102,11 +109,10 @@ function App() {
   
 
   const handleFile = (file:File) => {
-    setIsLoading(false)
     setIsSuccess(false)
     setItemNames([])
     setResult([])
-
+    setIsError(false)
     
     setTitle(file.name)
 		const reader = new FileReader();
@@ -129,9 +135,12 @@ function App() {
 	};
   return (
   <Grid container className={styles.root}>
+    <Box style={{width:'100%'}}>
+    {isLoading && <LinearProgress />}
+    </Box>
     <DragDropFile handleFile={handleFile}>
       <div className="row"><div className="col-xs-12">
-        <DataInput handleFile={handleFile} />
+        <DataInput handleFile={handleFile} isLoading={isLoading}/>
       </div></div>
     </DragDropFile>
   </Grid>
@@ -141,9 +150,9 @@ function App() {
 const useStyles = makeStyles(theme => ({
     root: {
       height: '100vh',
-      alignItems:'center',
       justifyContent:'center',
-      backgroundColor: theme.palette.background.paper
+      backgroundColor: theme.palette.background.paper,
+      flexDirection: 'row'
     },
     button: {
       width: 200,
@@ -180,7 +189,7 @@ const SheetJSFT = [
 ].map(function(x) { return "." + x; }).join(",");
 
 
-const DataInput = ({handleFile}: any) => {
+const DataInput = ({handleFile, isLoading}: any) => {
 	const styles = useStyles();
 	const handleChange = (e: any) => {
     const files = e.target.files;
@@ -200,6 +209,7 @@ const DataInput = ({handleFile}: any) => {
       <Box>
         <InputLabel htmlFor="file">파일 업로드 </InputLabel>
         <input type="file" className={styles.formControl} id="file" accept={SheetJSFT} onChange={handleChange} 
+        disabled={isLoading}
         onClick={(event: any)=> { 
           event.target.value = null
      }}/>
