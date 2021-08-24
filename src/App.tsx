@@ -36,11 +36,10 @@ function App() {
 
   
   const fetchData = (async (item_name: string) => {
-    const headers = {'Access-Control-Allow-Origin': '*'}
+    
   
-    const baseUrl = 'https://cors-anywhere.herokuapp.com/http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService1/getMdcinPrductItem'; /*URL*/
+    const baseUrl = 'http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService1/getMdcinPrductItem'; /*URL*/
     const response = await axios.get(baseUrl, {
-      headers,
       params: {
         ServiceKey,
         item_name: encodeURI(item_name)
