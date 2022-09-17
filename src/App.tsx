@@ -19,12 +19,22 @@ function App() {
 
   const filterData = (item: any, item_name: any) => {
     if (!item.CNSGN_MANUF) return;
+
     setResult((prevArray: any) => [
       ...prevArray,
       {
         품목기준코드: item.ITEM_SEQ || "",
         품목명: item_name[0] || "",
-        위탁제조업체: item.CNSGN_MANUF || "",
+        위탁제조업체: item.CNSGN_MANUF || "자사",
+        전문일반: item.ETC_OTC_CODE || "",
+        분류: item.CLASS_NO || "",
+        성상: item.CHART || "",
+        원료성분: item.MATERIAL_NAME || "",
+        유효기간: item.VALID_TERM || "",
+        포장단위: item.PACK_UNIT || "",
+        상태: item.CANCEL_NAME || "",
+        업체명: item.ENTP_NAME || "",
+        유효성분: item.MAIN_ITEM_INGR || "",
       },
     ]);
   };
