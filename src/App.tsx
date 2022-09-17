@@ -58,7 +58,7 @@ function App() {
       const { item } = items;
       filterData(item, item_name);
     } catch (e) {
-      console.log(e);
+      console.log("error", e);
     }
   };
 
