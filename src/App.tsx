@@ -18,8 +18,6 @@ function App() {
   const [title, setTitle] = useState("");
 
   const filterData = (item: any, item_name: any) => {
-    if (!item.CNSGN_MANUF) return;
-
     setResult((prevArray: any) => [
       ...prevArray,
       {
