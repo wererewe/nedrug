@@ -40,7 +40,8 @@ function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchData = async (item_name: string) => {
     const baseUrl =
-      "http://apis.data.go.kr/1471000/DrugPrdtPrmsnInfoService02/getDrugPrdtPrmsnDtlInq01"; /*URL*/
+      "http://apis.data.go.kr/1471000/DrugPrdtPrmsnInfoService04/getDrugPrdtPrmsnDtlInq03";
+    // "http://apis.data.go.kr/1471000/DrugPrdtPrmsnInfoService02/getDrugPrdtPrmsnDtlInq01"; /*URL*/
     const response = await axios.get(baseUrl, {
       params: {
         ServiceKey,
@@ -50,6 +51,7 @@ function App() {
     try {
       const parser = new XMLParser();
       let data = parser.parse(response.data);
+      console.log(data);
 
       const { items } = data.response.body;
       if (!items) {
@@ -63,7 +65,7 @@ function App() {
   };
 
   const fetch = useCallback(
-    async (result) => {
+    async (result: any) => {
       const promises = async () => {
         await Promise.all(result.map(fetchData));
       };
@@ -83,6 +85,7 @@ function App() {
           objectMaxLength[idx] >= columnValue.length
             ? objectMaxLength[idx]
             : columnValue.length;
+        return null;
       });
     });
     const wscols = objectMaxLength.map((w: number) => ({ width: w * 2 }));
